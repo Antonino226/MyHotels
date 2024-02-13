@@ -10,6 +10,16 @@
 
 	<title>Admin Login Page</title>
 
+  <style type="text/css">
+
+    .authlogin-side-wrapper{
+      width:100%;
+      height:100%;
+      background-image: url( {{ asset('upload/login.png') }});
+    }
+
+  </style>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,22 +27,22 @@
   <!-- End fonts -->
 
 	<!-- core:css -->
-	<link rel="stylesheet" href="{{ asset('../../../assets/vendors/core/core.css') }}">
+	<link rel="stylesheet" href="{{ asset('backend/assets/vendors/core/core.css') }}">
 	<!-- endinject -->
 
 	<!-- Plugin css for this page -->
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
-	<link rel="stylesheet" href="{{ asset('../../../assets/fonts/feather-font/css/iconfont.css') }}">
-	<link rel="stylesheet" href="{{ asset('../../../assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('backend/assets/fonts/feather-font/css/iconfont.css') }}">
+	<link rel="stylesheet" href="{{ asset('backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
 	<!-- endinject -->
 
   <!-- Layout styles -->  
-	<link rel="stylesheet" href="{{ asset('../../../assets/css/demo2/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('backend/assets/css/demo2/style.css') }}">
   <!-- End layout styles -->
 
-  <link rel="shortcut icon" href="{{ asset('../../../assets/images/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -44,7 +54,7 @@
 						<div class="card">
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
-                  <div class="auth-side-wrapper">
+                  <div class="authlogin-side-wrapper">
 
                   </div>
                 </div>
@@ -52,6 +62,7 @@
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="#" class="noble-ui-logo logo-light d-block mb-2">Noble<span>UI</span></a>
                     <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
+                    
                     <form class="forms-sample" method="POST" action="{{ route('login') }}">
                     @csrf
                       <div class="mb-3">
