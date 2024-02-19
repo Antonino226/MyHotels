@@ -76,16 +76,14 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                amenitis_name: {
+                name: {
                     required : true,
                 },                
             },
             messages :{
-                amenitis_name: {
-                    required : 'Please Enter Amenitis Name',
+                name: {
+                    required : 'Please Enter Permission Name',
                 }, 
-                 
-
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
