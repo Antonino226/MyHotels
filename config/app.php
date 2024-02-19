@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Exceptions\InvalidIntervalException;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -185,7 +186,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */

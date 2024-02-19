@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PropertyType;
+use App\Models\Amenities;
+
 class PropertyTypeController extends Controller
 {
     public function AllType(){
@@ -68,6 +70,65 @@ class PropertyTypeController extends Controller
 
         $notifiaction = array(
             'message' => 'Property Type Deleted Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notifiaction);
+    }
+
+    ///////// Amenitites All Method
+
+    public function AllAmenitie(){
+        $amenities = Amenities::latest()->get();
+        return view('backend.amenities.all_amenities',compact('amenities'));
+    }
+
+    public function AddAmenitie(){
+        return view('backend.amenities.add_amenities');
+    }
+
+    public function StoreAmenitie(Request $request)
+    {
+        Amenities::insert([
+            'amenitis_name' => $request->amenitis_name,
+        ]);
+
+        $notifiaction = array(
+            'message' => 'Amenities Create Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.amenitie')->with($notifiaction);
+    }
+
+    public function EditAmenitie($id){
+
+        $amenities = Amenities::findOrFail($id);
+        return view('backend.amenities.edit_amenities',compact('amenities'));
+    }
+
+    public function UpdateAmenitie(Request $request)
+    {
+        $ame_id = $request->id;
+
+        Amenities::findOrFail($ame_id)->update([
+            'amenitis_name' => $request->amenitis_name,
+        ]);
+
+        $notifiaction = array(
+            'message' => 'Amenities Create Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.amenitie')->with($notifiaction);
+    }
+
+    public function DeleteAmenitie($id)
+    {
+        Amenities::findOrFail($id)->delete();
+
+        $notifiaction = array(
+            'message' => 'Amenities Delete Successfully',
             'alert-type' => 'success',
         );
 
