@@ -57,7 +57,7 @@
                                     <div class="col-9">
 
                                     @php
-                                    $permission = App\Models\User::getpermissionByGroupName($group->
+                                    $permissions = App\Models\User::getpermissionByGroupName($group->
                                     group_name)
                                     @endphp
 

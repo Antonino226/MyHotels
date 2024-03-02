@@ -43,7 +43,7 @@
                                     <div class="col-3">
                                     
                                     @php
-                                    $permission = App\Models\User::getpermissionByGroupName($group->
+                                    $permissions = App\Models\User::getpermissionByGroupName($group->
                                     group_name)
                                     @endphp
                                     

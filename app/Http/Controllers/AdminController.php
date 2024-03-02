@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Admin;
+use Spatie\Permission\Models\Role;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
@@ -57,13 +59,13 @@ class AdminController extends Controller
 
         $data->save();
 
-        $notifiaction = array(
+        $notification = array(
             'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'success',
 
         );
 
-        return redirect()->back()->with($notifiaction);
+        return redirect()->back()->with($notification);
     }
 
     public function AdminChangePassword()
@@ -85,12 +87,12 @@ class AdminController extends Controller
         //Match the old password
 
         if(!Hash::check($request->old_password, auth::user()->password)){
-            $notifiaction = array(
+            $notification = array(
                 'message' => 'Old Password Does not Match!',
                 'alert-type' => 'error',
             );
     
-            return back()->with($notifiaction);
+            return back()->with($notification);
         }
 
         /// Update The New Password
@@ -99,12 +101,98 @@ class AdminController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        $notifiaction = array(
+        $notification = array(
             'message' => 'Password Change Successfully',
             'alert-type' => 'success',
         );
 
-        return back()->with($notifiaction);
+        return back()->with($notification);
 
     }
+
+    public function AllAdmin(){
+        $alladmin = User::where('role','admin')->get();
+        return view('backend.pages.admin.all_admin',compact('alladmin'));
+    }
+
+    public function AddAdmin(){
+        $roles = Role::all();
+        return view('backend.pages.admin.add_admin',compact('roles'));
+    }
+
+    public function StoreAdmin(Request $request)
+    {
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+
+        if($request->roles){
+            $user->assignRole($request->roles);
+        }
+
+        $user->save();
+
+        $notification = array(
+            'message' => 'New Admin Profile Inserted Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function EditAdmin($id){
+
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        return view('backend.pages.admin.edit_admin',compact('user','roles'));
+    }
+
+    public function UpdateAdmin(Request $request,$id)
+    {
+        $user = User::findOrFail($id);
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+        $user->roles()->detach();
+        if($request->roles){
+            $user->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => 'New Admin User Updated Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function DeleteAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        if(!is_null($user)){
+            $user->delete();
+        }
+
+        $notification = array(
+            'message' => 'Admin Delete Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    
 }
