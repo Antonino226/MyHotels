@@ -12,12 +12,12 @@ class PropertyTypeController extends Controller
 {
     public function AllType(){
         $types = PropertyType::latest()->get();
-        return view('backend.type.all_type',compact('types'));
+        return view('backend.pages.type.all_type',compact('types'));
     }
 
     public function AddType()
     {
-        return view('backend.type.add_type');
+        return view('backend.pages.type.add_type');
     }
 
     public function StoreType(Request $request)
@@ -43,7 +43,7 @@ class PropertyTypeController extends Controller
     public function EditType($id)
     {
         $types = PropertyType::findOrFail($id);
-        return view('backend.type.edit_type',compact('types'));
+        return view('backend.pages.type.edit_type',compact('types'));
     }
 
     public function UpdateType(Request $request)

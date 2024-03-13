@@ -45,6 +45,7 @@
           </li>
           @endif
           
+          @if(Auth::user()->can('amenitie.menu'))
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#amenitie" role="button" aria-expanded="false" aria-controls="emails">
               <i class="link-icon" data-feather="mail"></i>
@@ -53,15 +54,20 @@
             </a>
             <div class="collapse" id="amenitie">
               <ul class="nav sub-menu">
+              @if(Auth::user()->can('all.amenitie'))
                 <li class="nav-item">
                   <a href="{{ route('all.amenitie') }}" class="nav-link">All Amenitie</a>
                 </li>
+              @endif
+              @if(Auth::user()->can('add.amenitie'))
                 <li class="nav-item">
                   <a href="{{ route('add.amenitie') }}" class="nav-link">Add Amenitie</a>
                 </li>
+              @endif
               </ul>
             </div>
           </li>
+          @endif
 
           <li class="nav-item">
             <a href="pages/apps/calendar.html" class="nav-link">
