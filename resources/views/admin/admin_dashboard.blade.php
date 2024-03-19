@@ -110,6 +110,8 @@
 		<script src="{{ asset('backend/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
 		<script src="{{ asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/data-table.js') }}"></script>
+		<script src="{{ asset('backend/assets/vendors/flatpickr/flatpickr.min.js') }}" ></script>
+		<script src="{{ asset('backend/assets/js/flatpickr.js') }}" ></script>
 	<!-- End Datatables -->
 </body>
 </html>    

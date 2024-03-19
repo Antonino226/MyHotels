@@ -29,7 +29,6 @@
             </a>
             <div class="collapse" id="emails">
               <ul class="nav sub-menu">
-                
                 @if(Auth::user()->can('all.type'))
                 <li class="nav-item">
                   <a href="{{ route('all.type') }}" class="nav-link">All Type</a>
@@ -62,6 +61,78 @@
               @if(Auth::user()->can('add.amenitie'))
                 <li class="nav-item">
                   <a href="{{ route('add.amenitie') }}" class="nav-link">Add Amenitie</a>
+                </li>
+              @endif
+              </ul>
+            </div>
+          </li>
+          @endif
+
+          @if(Auth::user()->can('hotel.menu'))
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#hotel" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">Hotel</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="hotel">
+              <ul class="nav sub-menu">
+              @if(Auth::user()->can('all.hotel'))
+                <li class="nav-item">
+                  <a href="{{ route('all.hotel') }}" class="nav-link">All hotel</a>
+                </li>
+              @endif
+              @if(Auth::user()->can('add.hotel'))
+                <li class="nav-item">
+                  <a href="{{ route('add.hotel') }}" class="nav-link">Add hotel</a>
+                </li>
+              @endif
+              </ul>
+            </div>
+          </li>
+          @endif
+
+          @if(Auth::user()->can('room.menu'))
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#room" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">Room</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="room">
+              <ul class="nav sub-menu">
+              @if(Auth::user()->can('all.room'))
+                <li class="nav-item">
+                  <a href="{{ route('all.room') }}" class="nav-link">All room</a>
+                </li>
+              @endif
+              @if(Auth::user()->can('add.room'))
+                <li class="nav-item">
+                  <a href="{{ route('add.room') }}" class="nav-link">Add room</a>
+                </li>
+              @endif
+              </ul>
+            </div>
+          </li>
+          @endif
+
+          @if(Auth::user()->can('booking.menu'))
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#booking" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">Booking</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="booking">
+              <ul class="nav sub-menu">
+              @if(Auth::user()->can('all.booking'))
+                <li class="nav-item">
+                  <a href="{{ route('all.booking') }}" class="nav-link">All booking</a>
+                </li>
+              @endif
+              @if(Auth::user()->can('add.booking'))
+                <li class="nav-item">
+                  <a href="{{ route('add.booking') }}" class="nav-link">Add booking</a>
                 </li>
               @endif
               </ul>

@@ -7,6 +7,8 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\HotelController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +72,31 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::get('/edit/amenitie/{id}', 'EditAmenitie')->name('edit.amenitie');
         Route::post('/update/amenitie', 'UpdateAmenitie')->name('update.amenitie');
         Route::get('/delete/amenitie/{id}', 'DeleteAmenitie')->name('delete.amenitie');
+    });
 
+    Route::controller(HotelController::class)->group(function(){
+        Route::get('/all/room', 'AllRoom')->name('all.room');
+        Route::get('/add/room', 'AddRoom')->name('add.room');
+        Route::post('/store/room', 'StoreRoom')->name('store.room');
+        Route::get('/edit/room/{id}', 'EditRoom')->name('edit.room');
+        Route::post('/update/room', 'UpdateRoom')->name('update.room');
+        Route::get('/delete/room/{id}', 'DeleteRoom')->name('delete.room');
+        
+        Route::get('/all/booking', 'AllBooking')->name('all.booking');
+        Route::get('/add/booking', 'AddBooking')->name('add.booking');
+        Route::post('/store/booking', 'StoreBooking')->name('store.booking');
+        Route::get('/edit/booking/{id}', 'EditBooking')->name('edit.booking');
+        Route::post('/update/booking', 'UpdateBooking')->name('update.booking');
+        Route::get('/delete/booking/{id}', 'DeleteBooking')->name('delete.booking');
+        Route::get('/info/booking/{id}', 'InfoBooking')->name('info.booking');
+        
+        Route::get('/all/hotel', 'AllHotel')->name('all.hotel');
+        Route::get('/add/hotel', 'AddHotel')->name('add.hotel');
+        Route::post('/store/hotel', 'StoreHotel')->name('store.hotel');
+        Route::get('/edit/hotel/{id}', 'EditHotel')->name('edit.hotel');
+        Route::post('/update/hotel', 'UpdateHotel')->name('update.hotel');
+        Route::get('/delete/hotel/{id}', 'DeleteHotel')->name('delete.hotel');
+        Route::get('/info/hotel/{id}', 'InfoHotel')->name('info.hotel');
     });
 
     /// Permission All Route

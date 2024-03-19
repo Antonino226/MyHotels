@@ -36,8 +36,8 @@
                             @endforeach
                         </td>
 
-                        <td><a href="{{ route('admin.edit.roles',$item->id) }}" class="btn btn-outline-warning">Edit</a>
-                        <a href="{{ route('admin.roles.delete',$item->id) }}" class="btn btn-outline-danger" id="delete" >Delete</a></td>
+                        <td><a href="{{ route('admin.edit.roles',$item->id) }}" class="btn btn-outline-warning"><i data-feather="edit"></i></a>
+                        <a href="{{ route('admin.roles.delete',$item->id) }}" class="btn btn-outline-danger" id="delete"><i data-feather="trash"></i></a></td>
                       </tr>
                       @endforeach
                     </tbody>

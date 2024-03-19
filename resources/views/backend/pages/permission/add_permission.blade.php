@@ -26,8 +26,10 @@
                                 <div class="form-group mb-3">
                                     <label for="exampleInputUsername1" class="form-label">Group Name</label>
                                     <select name="group_name" class="form-select" id="exampleFormControlSelect1">
+                                        <option value="hotel">Hotel</option>
+                                        <option value="room">Room</option>
+                                        <option value="booking">Booking</option>
                                         <option value="property_type">Property Type</option>
-                                        <option value="state">State</option>
                                         <option value="amenities">Amenities</option>
                                         <option value="property">Property</option>
                                         <option value="package_history">Package History</option>
