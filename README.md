@@ -1,5 +1,5 @@
 # Introduzione
-MyHotels è un progetto basato su Laravel che offre un sistema di gestione alberghiera completo per gli amministratori. Consente agli amministratori di gestire gli hotel, le camere e i ruoli degli utenti nel sistema.
+MyHotels è un progetto IN FASE DI SVILUPPO basato su Laravel che offre un sistema di gestione alberghiera completo per gli amministratori. Consente agli amministratori di gestire gli hotel, le camere e i ruoli degli utenti nel sistema.
 
 # Tecnologie utilizzate
 Laravel: Framework PHP che offre una struttura robusta per lo sviluppo di applicazioni web moderne.
