@@ -3,14 +3,23 @@
 					<i data-feather="menu"></i>
 				</a>
 				<div class="navbar-content">
-					<form class="search-form">
-						<div class="input-group">
-              <div class="input-group-text">
-                <i data-feather="search"></i>
-              </div>
-							<input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
-						</div>
-					</form>
+					<form class="search-form"
+              method="GET"
+              action="{{ route('global.search') }}">
+            <div class="input-group">
+                <div class="input-group-text">
+                    <i data-feather="search"></i>
+                </div>
+                <input
+                    type="search"
+                    name="q"
+                    class="form-control"
+                    id="navbarForm"
+                    placeholder="Search here..."
+                    value="{{ request('q') }}"
+                >
+            </div>
+        </form>
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

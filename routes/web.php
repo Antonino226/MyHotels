@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\HotelController;
-
+use App\Http\Controllers\GlobalSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,5 +162,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::put('/update/user/{id}', 'UpdateUser')->name('update.user');
         Route::delete('/delete/user/{id}', 'DeleteUser')->name('delete.user');
     });
+
+    Route::get('/admin/search', [GlobalSearchController::class, 'index'])->name('global.search');
 
 });
