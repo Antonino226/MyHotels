@@ -158,23 +158,39 @@ class RoleController extends Controller
         compact('roles','permissions','permission_groups'));
     }
 
-    public function RolePermissionStore(Request $request){
-        $data = array();
-        $permissions = $request->permission;
+    public function RolePermissionStore(Request $request)
+    {
+        $request->validate([
+            'role_id' => ['required', 'integer', 'exists:roles,id'],
+            'permission' => ['sometimes', 'array'],
+            'permission.*' => [
+                'integer',
+                'distinct',
+                'exists:permissions,id',
+            ],
+        ]);
 
-        foreach($permissions as $key => $item){
-            $data['role_id'] = $request->role_id;
-            $data['permission_id'] = $item;
+        $role = Role::findOrFail($request->input('role_id'));
 
-            DB::table('role_has_permissions')->insertOrIgnore($data);
-        }
+        // Se nessuna checkbox è selezionata, usa un array vuoto.
+        $permissionIds = $request->input('permission', []);
 
-        $notification = array(
-            'message' => 'Role Permissions Added Successfully',
+        $permissions = \Spatie\Permission\Models\Permission::whereIn(
+            'id',
+            $permissionIds
+        )->get();
+
+        // Sincronizza i permessi selezionati con quelli del ruolo.
+        $role->syncPermissions($permissions);
+
+        // Invalida la cache dei permessi.
+        app(\Spatie\Permission\PermissionRegistrar::class)
+            ->forgetCachedPermissions();
+
+        return redirect()->back()->with([
+            'message' => 'Permessi del ruolo aggiornati correttamente',
             'alert-type' => 'success',
-        );
-
-        return redirect()->back()->with($notification);
+        ]);
     }
 
     public function AllRolesPermission(){
@@ -194,11 +210,12 @@ class RoleController extends Controller
     public function AdminRolesUpdate(Request $request, $id){
 
         $role = Role::findOrFail($id);
-        $permissions = $request->permission;
+        $permissions = $request->input('permission', []);
 
-        if(!empty($permissions)){
-            $role->syncPermissions($permissions);
-        }
+        $role->syncPermissions($permissions);
+
+        app(\Spatie\Permission\PermissionRegistrar::class)
+            ->forgetCachedPermissions();
 
         $notification = array(
             'message' => 'Role Permission Added Successfully',

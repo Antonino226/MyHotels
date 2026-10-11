@@ -26,35 +26,22 @@
                                 <div class="form-group mb-3">
                                     <label for="exampleInputUsername1" class="form-label">Group Name</label>
                                     <select name="group_name" class="form-select" id="exampleFormControlSelect1">
-                                    <option value="" disabled="">Select Group</option>
-                                    <option value="property_type" {{ $permission->group_name == 'type' ? 'selected' : '' }}
-                                        >Property Type</option>
-                                    <option value="state" {{ $permission->group_name == 'state' ? 'selected' : '' }}
-                                        >State</option>
-                                    <option value="amenities" {{ $permission->group_name == 'amenities' ? 'selected' : '' }}
-                                        >Amenities</option>
-                                    <option value="property" {{ $permission->group_name == 'property' ? 'selected' : '' }}
-                                        >Property</option>
-                                    <option value="history" {{ $permission->group_name == 'history' ? 'selected' : '' }}
-                                        >Package History</option>
-                                    <option value="message" {{ $permission->group_name == 'message' ? 'selected' : '' }}
-                                        >Property Message</option>
-                                    <option value="testimonials" {{ $permission->group_name == 'testimonials' ? 'selected' : '' }}
-                                        >Testimonials</option>
-                                    <option value="agent" {{ $permission->group_name == 'agent' ? 'selected' : '' }}
-                                        >Manage Agent</option>
-                                    <option value="blog_category" {{ $permission->group_name == 'blog_category' ? 'selected' : '' }}
-                                        >Blog Category</option>
-                                    <option value="blog_post" {{ $permission->group_name == 'blog_post' ? 'selected' : '' }}
-                                        >Blog Post</option>
-                                    <option value="blog_comment" {{ $permission->group_name == 'blog_comment' ? 'selected' : '' }}
-                                        >Blog Comment</option>
-                                    <option value="smtp_setting" {{ $permission->group_name == 'smtp_setting' ? 'selected' : '' }}
-                                        >SMTP Setting</option>
-                                    <option value="site_setting" {{ $permission->group_name == 'site_setting' ? 'selected' : '' }}
-                                        >Site Setting</option>
-                                    <option value="role_permission" {{ $permission->group_name == 'role_permission' ? 'selected' : '' }}
-                                        >Role & Permission</option>                                    
+                                    <option value="hotel">Hotel</option>
+                                        <option value="room">Room</option>
+                                        <option value="booking">Booking</option>
+                                        <option value="property_type">Property Type</option>
+                                        <option value="amenities">Amenities</option>
+                                        <option value="property">Property</option>
+                                        <option value="package_history">Package History</option>
+                                        <option value="property_message">Property Message</option>
+                                        <option value="testimonials">Testimonials</option>
+                                        <option value="manage_agent">Manage Agent</option>
+                                        <option value="blog_category">Blog Category</option>
+                                        <option value="blog_post">Blog Post</option>
+                                        <option value="blog_comment">Blog Comment</option>
+                                        <option value="smtp_setting">SMTP Setting</option>
+                                        <option value="site_setting">Site Setting</option>
+                                        <option value="role_permission">Role & Permission</option>                                   
                                     </select>
                                 </div>
                                 
