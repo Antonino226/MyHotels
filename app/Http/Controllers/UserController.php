@@ -154,4 +154,113 @@ class UserController extends Controller
         return back()->with($notification);
 
     }
+
+    // Mostra gli utenti con ruolo user.
+    public function AllUser()
+    {
+        $users = User::where('role', 'user')
+            ->orderByDesc('id')
+            ->get();
+
+        return view('backend.pages.users.all_user', compact('users'));
+    }
+
+    // Mostra il form per creare un utente.
+    public function AddUser()
+    {
+        return view('backend.pages.users.add_user');
+    }
+
+    
+    // Salva un nuovo utente creato dal pannello amministrativo.
+    public function StoreUser(Request $request)
+    {
+        // Validazione dei dati ricevuti dal form.
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|email|max:255|unique:users,email',
+            'phone' => 'nullable|string|max:30',
+            'address' => 'nullable|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.required' => 'Il nome è obbligatorio.',
+            'username.required' => 'Lo username è obbligatorio.',
+            'username.unique' => 'Questo username è già utilizzato.',
+            'email.required' => 'L’email è obbligatoria.',
+            'email.email' => 'Inserisci un indirizzo email valido.',
+            'email.unique' => 'Questa email è già registrata.',
+            'password.required' => 'La password è obbligatoria.',
+            'password.min' => 'La password deve contenere almeno 8 caratteri.',
+            'password.confirmed' => 'Le password non coincidono.',
+        ]);
+
+        // Crea il nuovo utente.
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? null;
+        $user->address = $validated['address'] ?? null;
+        $user->password = Hash::make($validated['password']);
+
+        // Il ruolo deve corrispondere al filtro utilizzato in AllUser().
+        $user->role = 'user';
+
+        $user->save();
+
+        // Torna all'elenco con un messaggio di conferma.
+        return redirect()->route('add.user')->with([
+            'message' => 'Utente creato con successo.',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function EditUser($id)
+    {
+        $user = User::where('role', 'user')->findOrFail($id);
+
+        return view('backend.pages.users.edit_user', compact('user'));
+    }
+
+    // Aggiorna i dati dell'utente.
+    public function UpdateUser(Request $request, $id)
+    {
+        $user = User::where('role', 'user')->findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:30',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        $user->name = $validated['name'];
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? null;
+        $user->address = $validated['address'] ?? null;
+
+        $user->save();
+
+        return redirect()->route('all.user')->with([
+            'message' => 'User updated successfully!',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    // Elimina un utente.
+    public function DeleteUser($id)
+    {
+        $user = User::where('role', 'user')->findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->route('all.user')->with([
+            'message' => 'User deleted successfully!',
+            'alert-type' => 'success',
+        ]);
+    }
+
 }

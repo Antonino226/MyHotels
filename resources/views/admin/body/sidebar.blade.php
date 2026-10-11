@@ -208,6 +208,43 @@
               </ul>
             </div>
           </li>
+
+          {{-- Manage User --}}
+      @if(Auth::user()->can('user.menu'))
+          <li class="nav-item nav-category">Manage User</li>
+          <li class="nav-item">
+              <a
+                  class="nav-link"
+                  data-bs-toggle="collapse"
+                  href="#users"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="users"
+              >
+                  <i class="link-icon" data-feather="users"></i>
+                  <span class="link-title">Manage User</span>
+                  <i class="link-arrow" data-feather="chevron-down"></i>
+              </a>
+              <div class="collapse" id="users">
+                  <ul class="nav sub-menu">
+                      @if(Auth::user()->can('all.user'))
+                          <li class="nav-item">
+                              <a href="{{ route('all.user') }}" class="nav-link">
+                                  All User
+                              </a>
+                          </li>
+                      @endif
+                      @if(Auth::user()->can('add.user'))
+                          <li class="nav-item">
+                              <a href="{{ route('add.user') }}" class="nav-link">
+                                  Add User
+                              </a>
+                          </li>
+                      @endif
+                  </ul>
+              </div>
+          </li>
+      @endif
           
           <li class="nav-item nav-category">Docs</li>
           <li class="nav-item">

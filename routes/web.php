@@ -153,4 +153,14 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::get('/delete/admin/{id}', 'DeleteAdmin')->name('delete.admin');
     });
 
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/all/user', 'AllUser')->name('all.user');
+        Route::get('/add/user', 'AddUser')->name('add.user');
+        Route::post('/store-user', 'StoreUser' )->name('store.user');
+        
+        Route::get('/edit/user/{id}', 'EditUser')->name('edit.user');
+        Route::put('/update/user/{id}', 'UpdateUser')->name('update.user');
+        Route::delete('/delete/user/{id}', 'DeleteUser')->name('delete.user');
+    });
+
 });
